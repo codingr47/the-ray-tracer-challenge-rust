@@ -136,3 +136,37 @@ fn when_multiplying_a_point_you_get_multiplied_components() {
     assert_eq!(B.Y(), -7.0);
     assert_eq!(B.Z(), 10.5);
 }
+
+#[rstest]
+fn when_multiplying_a_vector_you_get_multiplied_components() {
+    let V1 = Vector::new(1.0, -2.0, 3.0);
+    let scalar = 3.5;
+    let V2 = V1 * scalar;
+
+    assert_eq!(V2.X(), 3.5);
+    assert_eq!(V2.Y(), -7.0);
+    assert_eq!(V2.Z(), 10.5);
+}
+
+
+#[rstest]
+fn when_dividing_a_point_by_a_float_you_get_divided_components() {
+    let A = Point::new(1.0, -2.0, 3.0);
+    let divider = 2.0;
+    let B = A / divider;
+
+    assert_eq!(B.X(), 0.5);
+    assert_eq!(B.Y(), -1.0);
+    assert_eq!(B.Z(), 1.5);
+}
+
+#[rstest]
+fn when_dividing_a_vector_by_a_float_you_get_divided_components() {
+    let V1 = Vector::new(1.0, -2.0, 3.0);
+    let divider = 2.0;
+    let V2 = V1 / divider;
+
+    assert_eq!(V2.X(), 0.5);
+    assert_eq!(V2.Y(), -1.0);
+    assert_eq!(V2.Z(), 1.5);
+}

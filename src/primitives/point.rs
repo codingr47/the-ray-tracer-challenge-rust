@@ -1,5 +1,5 @@
 use crate::primitives::{coordinates::Coordinates, moveable::Moveable, vector::Vector};
-use std::ops::{Add, Mul, Neg, Sub};
+use std::ops::{Add, Div, Mul, Neg, Sub};
 
 pub struct Point(pub Coordinates);
 
@@ -86,6 +86,16 @@ impl Mul<f32> for Point {
     fn mul(self, scalar: f32) -> Self::Output {
         Point(
             Coordinates(scalar * self.X(), scalar * self.Y(), scalar * self.Z())
+        )
+    }
+}
+
+impl Div<f32> for Point {
+    type Output = Point;
+
+    fn div(self, divider: f32) -> Self::Output {
+        Point (
+            Coordinates(self.X() / divider, self.Y() / divider, self.Z() / divider)
         )
     }
 }

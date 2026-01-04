@@ -1,4 +1,4 @@
-use std::ops::{Add, Mul, Neg, Sub};
+use std::ops::{Add, Div, Mul, Neg, Sub};
 
 use crate::primitives::{coordinates::Coordinates, moveable::Moveable, point::Point};
 
@@ -79,6 +79,17 @@ impl Mul<f32> for Vector {
     fn mul(self, scalar: f32) -> Self::Output {
         Vector(
             Coordinates(scalar * self.X(), scalar * self.Y(), scalar * self.Z())
+        )
+    }
+}
+
+
+impl Div<f32> for Vector {
+    type Output = Vector;
+
+    fn div(self, divider: f32) -> Self::Output {
+        Vector (
+            Coordinates(self.X() / divider, self.Y() / divider, self.Z() / divider)
         )
     }
 }
