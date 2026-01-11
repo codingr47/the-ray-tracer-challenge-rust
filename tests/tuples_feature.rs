@@ -213,3 +213,15 @@ fn when_normalizing_vector_1_2_3_you_get_0_26726_0_53452_0_00178() {
 fn when_computing_dot_product_of_1_2_3_against_2_3_4_you_get_20() {
     assert_eq!(Vector::new(1.0, 2.0, 3.0).dot(Vector::new(2.0, 3.0, 4.0)), 20.0)
 }
+
+#[rstest]
+fn when_computing_cross_of_1_2_3_against_2_3_4_you_get_neg_1_2_neg_1_and_opposite_cross_you_get_1_neg_2_1() {
+    assert_eq!(
+        Vector::new(1.0, 2.0, 3.0).cross(Vector::new(2.0, 3.0, 4.0)), Vector::new(-1.0, 2.0, -1.0)
+    );
+
+    assert_eq!(
+        Vector::new(2.0, 3.0, 4.0).cross(Vector::new(1.0, 2.0, 3.0)), Vector::new(1.0, -2.0, 1.0)
+    );
+    
+}

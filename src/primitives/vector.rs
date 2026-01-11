@@ -36,6 +36,16 @@ impl Vector {
         + self.Y() * other.Y()
         + self.Z() * other.Z()
     }
+
+    pub fn cross(&self, other: Self) -> Self {
+        Self(
+            Coordinates(
+                self.Y() * other.Z() - self.Z() * other.Y(),
+                self.Z() * other.X() - self.X() * other.Z(),
+                self.X() * other.Y() - self.Y() * other.X()    
+            )
+        )
+    }
 }
 
 impl Moveable for Vector {
