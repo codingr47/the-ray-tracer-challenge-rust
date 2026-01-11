@@ -30,6 +30,12 @@ impl Vector {
             )
         );
     }
+
+    pub fn dot(&self, other: Self) -> f32 {
+        self.X() * other.X() 
+        + self.Y() * other.Y()
+        + self.Z() * other.Z()
+    }
 }
 
 impl Moveable for Vector {
@@ -127,3 +133,5 @@ impl PartialEq for Vector {
         !self.eq(other)
     }
 }
+
+
