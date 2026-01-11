@@ -1,7 +1,8 @@
-use std::ops::{Add, Div, Mul, Neg, Sub};
+use std::{ops::{Add, Div, Mul, Neg, Sub}};
 
-use crate::primitives::{coordinates::Coordinates, moveable::Moveable, point::Point};
+use crate::{primitives::{coordinates::Coordinates, moveable::Moveable, point::Point}, utils::math::equal};
 
+#[derive(Debug)]
 pub struct Vector (pub Coordinates);
 
 impl Vector {
@@ -10,6 +11,25 @@ impl Vector {
     pub fn X(&self) -> f32 { self.0.X() }
     pub fn Y(&self) -> f32 { self.0.Y() }
     pub fn Z(&self) -> f32 { self.0.Z() }
+
+    pub fn magnitude(&self) -> f32 {
+        f32::sqrt(
+            f32::powf(self.X(), 2.0) 
+            + f32::powf(self.Y(), 2.0) 
+            + f32::powf(self.Z(), 2.0)
+        )
+    }
+
+    pub fn normalize(&self) -> Self {
+        let mag = self.magnitude();
+        return Self(
+            Coordinates(
+                self.X() / mag, 
+                self.Y() / mag,
+                self.Z() / mag
+            )
+        );
+    }
 }
 
 impl Moveable for Vector {
@@ -91,5 +111,19 @@ impl Div<f32> for Vector {
         Vector (
             Coordinates(self.X() / divider, self.Y() / divider, self.Z() / divider)
         )
+    }
+}
+
+impl PartialEq for Vector {
+    fn eq(&self, other: &Self) -> bool {
+        return 
+        equal( self.X(), other.X()) 
+        && equal(self.Y(), other.Y())
+        && equal(self.Z(), other.Z())
+            
+    }
+
+    fn ne(&self, other: &Self) -> bool {
+        !self.eq(other)
     }
 }

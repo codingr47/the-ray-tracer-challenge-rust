@@ -170,3 +170,42 @@ fn when_dividing_a_vector_by_a_float_you_get_divided_components() {
     assert_eq!(V2.Y(), -1.0);
     assert_eq!(V2.Z(), 1.5);
 }
+
+#[rstest]
+fn when_computing_the_magnitodue_of_vector_1_0_0_you_get_1() {
+    assert_eq!(Vector::new(1.0, 0.0, 0.0).magnitude(), 1.0);
+}
+
+#[rstest]
+fn when_computing_the_magnitodue_of_vector_0_1_0_you_get_1() {
+    assert_eq!(Vector::new(0.0, 1.0, 0.0).magnitude(), 1.0);
+}
+
+
+#[rstest]
+fn when_computing_the_magnitodue_of_vector_0_0_1_you_get_1() {
+    assert_eq!(Vector::new(0.0, 0.0, 1.0).magnitude(), 1.0);
+}
+
+#[rstest]
+fn when_computing_the_magnitodue_of_vector_1_2_3_you_get_sqrt_14() {
+    assert_eq!(Vector::new(1.0, 2.0, 3.0).magnitude(), f32::sqrt(14.0));
+}
+
+
+#[rstest]
+fn when_computing_the_magnitodue_of_vector_neg_1_neg_2_neg_3_you_get_sqrt_14() {
+    assert_eq!(Vector::new(-1.0, -2.0, -3.0).magnitude(), f32::sqrt(14.0));
+}
+
+
+#[rstest]
+fn when_normalizing_vector_4_0_0_you_get_1_0_0() {
+    assert_eq!(Vector::new(4.0, 0.0, 0.0).normalize(), Vector::new(1.0, 0.0, 0.0));
+}
+
+#[rstest]
+fn when_normalizing_vector_1_2_3_you_get_0_26726_0_53452_0_00178() {
+    assert_eq!(Vector::new(1.0, 2.0, 3.0).normalize(), Vector::new(0.26726, 0.53452, 0.80178));
+}
+

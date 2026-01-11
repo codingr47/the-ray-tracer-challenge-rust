@@ -1,6 +1,7 @@
 use crate::primitives::{coordinates::Coordinates, moveable::Moveable, vector::Vector};
 use std::ops::{Add, Div, Mul, Neg, Sub};
 
+#[derive(Debug)]
 pub struct Point(pub Coordinates);
 
 impl Point {
