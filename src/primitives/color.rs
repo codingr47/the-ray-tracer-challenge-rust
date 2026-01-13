@@ -3,7 +3,7 @@ use crate::utils::math::equal;
 
 use crate::{impl_tuple_add_scalar, impl_tuple_eq, impl_tuple_mul_scalar, primitives::{coordinates::Coordinates, moveable::Moveable}};
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Color (pub Coordinates);
 
 impl Color {
