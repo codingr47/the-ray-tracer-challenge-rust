@@ -1,6 +1,6 @@
 use std::{ops::{Add, Div, Mul, Neg, Sub}};
 
-use crate::{primitives::{coordinates::Coordinates, moveable::Moveable, point::Point}, utils::math::equal};
+use crate::{impl_tuple_add_scalar, impl_tuple_eq, impl_tuple_mul_scalar, primitives::{coordinates::Coordinates, moveable::Moveable, point::Point}, utils::math::equal};
 
 #[derive(Debug)]
 pub struct Vector (pub Coordinates);
@@ -55,16 +55,18 @@ impl Moveable for Vector {
 }
 
 
-impl Add for Vector {
-    type Output = Vector;
+impl_tuple_add_scalar!(Vector);
 
-     fn add(self, other: Self) -> Self {
-         return Self(
-            Coordinates(
-                self.X() + other.X(),
-                self.Y() + other.Y(),
-                self.Z() + other.Z(),
-        ));
+impl Add<Vector> for Vector {
+    
+    type Output = Self;
+
+    fn add(self, other: Vector) -> Self::Output {
+        Self::new(
+            self.X() + other.X(),
+            self.Y() + other.Y(),
+            self.Z() + other.Z()
+        )
     }
 }
 
@@ -108,16 +110,8 @@ impl Neg for Vector {
 }
 
 
-//By Scalar
-impl Mul<f32> for Vector {
-    type Output = Vector;
-
-    fn mul(self, scalar: f32) -> Self::Output {
-        Vector(
-            Coordinates(scalar * self.X(), scalar * self.Y(), scalar * self.Z())
-        )
-    }
-}
+//Vector multiply By Scalar
+impl_tuple_mul_scalar!(Vector);
 
 
 impl Div<f32> for Vector {
@@ -130,18 +124,5 @@ impl Div<f32> for Vector {
     }
 }
 
-impl PartialEq for Vector {
-    fn eq(&self, other: &Self) -> bool {
-        return 
-        equal( self.X(), other.X()) 
-        && equal(self.Y(), other.Y())
-        && equal(self.Z(), other.Z())
-            
-    }
-
-    fn ne(&self, other: &Self) -> bool {
-        !self.eq(other)
-    }
-}
-
+impl_tuple_eq!(Vector);
 

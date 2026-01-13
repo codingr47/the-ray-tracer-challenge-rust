@@ -1,5 +1,5 @@
 use rstest::rstest;
-use the_raytracer_challenge_rust::primitives::{moveable::Moveable, point::Point, utils::*, vector::Vector};
+use the_raytracer_challenge_rust::primitives::{color::Color, moveable::Moveable, point::Point, utils::*, vector::Vector};
 
 #[rstest]
 fn when_w_is_1_A_is_a_point() {
@@ -224,4 +224,36 @@ fn when_computing_cross_of_1_2_3_against_2_3_4_you_get_neg_1_2_neg_1_and_opposit
         Vector::new(2.0, 3.0, 4.0).cross(Vector::new(1.0, 2.0, 3.0)), Vector::new(1.0, -2.0, 1.0)
     );
     
+}
+
+#[rstest]
+fn when_adding_colors_you_get_a_color() {
+    let C1 = Color::new(0.9, 0.6, 0.75);
+    let C2 = Color::new(0.7, 0.1, 0.25);
+    let C3 = C1 + C2;
+    assert_eq!(C3, Color::new(1.6, 0.7, 1.0))
+}
+
+#[rstest]
+fn when_sub_colors_you_get_a_color() {
+    let C1 = Color::new(0.9, 0.6, 0.75);
+    let C2 = Color::new(0.7, 0.1, 0.25);
+    let C3 = C1 - C2;
+    assert_eq!(C3, Color::new(0.2, 0.5, 0.5))
+}
+
+#[rstest]
+fn when_mul_color_by_scalar_you_get_a_color() {
+    let C1 = Color::new(0.2, 0.3, 0.4);
+    let a = 2.0;
+    let C2 = C1 * a;
+    assert_eq!(C2, Color::new(0.4, 0.6, 0.8))
+}
+
+#[rstest]
+fn when_mul_two_colors_you_get_a_color_correspondent_components_multiplied() {
+    let C1 = Color::new(1.0, 0.2, 0.4);
+    let C2 = Color::new(0.9, 1.0, 0.1);
+    let C3 = C1 * C2;
+    assert_eq!(C3, Color::new(0.9, 0.2, 0.04))
 }

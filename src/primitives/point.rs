@@ -1,5 +1,6 @@
-use crate::primitives::{coordinates::Coordinates, moveable::Moveable, vector::Vector};
+use crate::{impl_tuple_eq, impl_tuple_mul_scalar, primitives::{coordinates::Coordinates, moveable::Moveable, vector::Vector}};
 use std::ops::{Add, Div, Mul, Neg, Sub};
+use crate::utils::math::equal;
 
 #[derive(Debug)]
 pub struct Point(pub Coordinates);
@@ -80,16 +81,8 @@ impl Neg for Point {
     }
 }
 
-//By Scalar
-impl Mul<f32> for Point {
-    type Output = Point;
-
-    fn mul(self, scalar: f32) -> Self::Output {
-        Point(
-            Coordinates(scalar * self.X(), scalar * self.Y(), scalar * self.Z())
-        )
-    }
-}
+//Point multiply By Scalar
+impl_tuple_mul_scalar!(Point);
 
 impl Div<f32> for Point {
     type Output = Point;
@@ -100,3 +93,5 @@ impl Div<f32> for Point {
         )
     }
 }
+
+impl_tuple_eq!(Point);
