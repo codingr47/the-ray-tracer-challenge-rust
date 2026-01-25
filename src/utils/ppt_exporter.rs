@@ -33,17 +33,20 @@ impl<'a> PPTExporter<'a> {
         self.append_value(format!("P3\n{} {}\n255\n", self.canvas.width.to_string(),  self.canvas.height.to_string()));
         for y in 0..self.canvas.height {
             for x in 0..self.canvas.width {
+                if x > 0 {
+                    self.append_value(" ".to_string());
+                }
                 let color_at = self.canvas.pixel_at(x, y);
                 let color = color_at.unwrap();
                 let r = i32::clamp((f32::round(color.red() * 255.0)) as i32, 0, 255).to_string() + " ";
                 let g = i32::clamp((f32::round(color.green() * 255.0)) as i32, 0, 255).to_string() + " ";
-                let b = i32::clamp((f32::round(color.blue() * 255.0)) as i32, 0, 255).to_string() + " ";
+                let b = i32::clamp((f32::round(color.blue() * 255.0)) as i32, 0, 255).to_string();
                 self.append_value(r);
                 self.append_value(g);
                 self.append_value(b);
             }
+            self.append_value("\n".to_string());
         }
-        self.append_value("\n".to_string());
         self.flush();
 
         return self.output.join("");
