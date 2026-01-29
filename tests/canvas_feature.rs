@@ -48,3 +48,16 @@ fn when_creating_canvas_with_pixel_data_ppm_consts_of_pixel_data() {
     let ppm = cv.to_ppm();
     assert_eq!(ppm, "P3\n5 3\n255\n255 0 0 0 0 0 0 0 0 0 0 0 0 0 0\n0 0 0 0 0 0 0 128 0 0 0 0 0 0 0\n0 0 0 0 0 0 0 0 0 0 0 0 0 0 255\n");
 }
+
+#[rstest]
+fn when_creating_canvas_with_long_lines_they_get_splitted_in_ppm() {
+    let mut cv = Canvas::new(10, 2);
+    let single_color = Color::new(1.0, 0.8, 0.6);
+    for x in 0..cv.width {
+        for y in 0..cv.height {
+            cv.write_pixel(x, y, single_color.clone());
+        }
+    }
+    let ppm = cv.to_ppm();
+    assert_eq!(ppm, "P3\n10 2\n255\n255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204\n153 255 204 153 255 204 153 255 204 153 255 204 153\n255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204\n153 255 204 153 255 204 153 255 204 153 255 204 153\n")
+}
