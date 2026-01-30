@@ -1,4 +1,4 @@
-use std::ops::Index;
+use std::{ops::{Index, Mul}, vec};
 
 use crate::utils::math::equal;
 
@@ -22,6 +22,12 @@ impl<const R:usize, const C: usize> Index<(usize, usize)> for Matrix<R, C> {
 }
 
 impl<const R: usize, const C:usize> Matrix<R, C> {
+
+    pub fn new() -> Self {
+        let m: [[f32; C]; R] = [[0.0; C]; R];
+        return Matrix { data: m };
+    }
+
     pub fn get(&self, r: usize, c: usize) -> f32 {
         return self.data[r][c];
     } 
@@ -42,5 +48,26 @@ impl<const R: usize, const C:usize> Matrix<R, C> {
         }
 
         return true;
+    }
+}
+
+impl<const R:usize, const C:usize> Mul for Matrix<R, C> {
+    type Output = Matrix<R, C>;
+    
+    fn mul(self, other: Self) -> Self::Output {
+        let mut m: Matrix<R, C> = Matrix::new(); 
+        for row in 0..self.data.len() {
+            for col in 0..self.data[row].len() {
+                let mut sum = 0.0;
+                
+                for i in 0..self.data.len() {
+                    sum += self[(row, i)] * other[(i, col)];
+                }
+
+                m.set(row, col, sum);
+            }
+        }
+
+        return m;   
     }
 }

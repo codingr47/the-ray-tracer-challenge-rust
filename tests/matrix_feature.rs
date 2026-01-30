@@ -75,3 +75,28 @@ fn  when_matrix_A_and_matrix_B_are_different_in_values_they_are_equal() {
 
   assert_eq!(A != B, true);
 }
+
+#[rstest]
+fn  when_matrix_A_and_matrix_B_are_multiplied_C_is_their_correct_multiplication() {
+  let A = Matrix::from([
+      [1.0, 2.0, 3.0, 4.0],
+      [5.0, 6.0, 7.0, 8.0],
+      [9.0, 8.0, 7.0, 6.0],
+      [5.0, 4.0, 3.0, 2.0]
+  ]);
+  let B = Matrix::from([
+      [-2.0, 1.0, 2.0, 3.0],
+      [3.0, 2.0, 1.0, -1.0],
+      [4.0, 3.0, 6.0, 5.0],
+      [1.0, 2.0, 7.0, 8.0]
+  ]);
+
+  assert_eq!(A * B, Matrix::from([
+    [20.0, 22.0, 50.0, 48.0],
+    [44.0, 54.0, 114.0, 108.0],
+    [40.0, 58.0, 110.0, 102.0],
+    [16.0, 26.0, 46.0, 42.0]
+  ]));
+
+
+}
