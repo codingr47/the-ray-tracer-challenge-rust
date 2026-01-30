@@ -23,7 +23,9 @@ impl<'a> PPTExporter<'a> {
          const MAGIC_NUMBER: usize = 70;
          let space_addition: usize = if should_add_space_after { 1 } else { 0 };
          if self.buffer.len() + value.len() + space_addition >= MAGIC_NUMBER {
-             self.buffer = self.buffer[0..self.buffer.len() - 1].to_string();
+             if self.buffer.as_bytes()[self.buffer.len() - 1] == b' ' {
+                self.buffer = self.buffer[0..self.buffer.len() - 1].to_string();
+             }
              self.flush();
              self.output.push("\n".to_string());
          }

@@ -2,7 +2,7 @@ use std::{ops::{Add, Div, Mul, Neg, Sub}};
 
 use crate::{impl_tuple_add_scalar, impl_tuple_eq, impl_tuple_mul_scalar, primitives::{coordinates::Coordinates, moveable::Moveable, point::Point}, utils::math::equal};
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Vector (pub Coordinates);
 
 impl Vector {

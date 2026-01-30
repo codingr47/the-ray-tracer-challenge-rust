@@ -2,7 +2,7 @@ use crate::{impl_tuple_eq, impl_tuple_mul_scalar, primitives::{coordinates::Coor
 use std::ops::{Add, Div, Mul, Neg, Sub};
 use crate::utils::math::equal;
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Point(pub Coordinates);
 
 impl Point {
