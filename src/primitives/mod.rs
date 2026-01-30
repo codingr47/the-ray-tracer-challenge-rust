@@ -7,3 +7,4 @@ pub mod color;
 pub mod canvas;
 pub mod environment;
 pub mod projectile;
+pub mod matrix;
